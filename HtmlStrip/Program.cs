@@ -59,6 +59,7 @@ namespace HtmlStrip
             }
 
             Console.WriteLine(concatenar);
+            Console.WriteLine("End");
         }
 
     }
