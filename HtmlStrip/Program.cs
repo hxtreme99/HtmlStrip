@@ -55,7 +55,6 @@ namespace HtmlStrip
                 concatenar = string.Concat(concatenar, tokens_apagar[i]);
 
             Console.WriteLine(concatenar);
-            Console.WriteLine("AHHHHHHHHHHH");
         }
     }
 }
