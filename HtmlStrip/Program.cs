@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace HtmlStrip
 {
@@ -22,16 +23,34 @@ namespace HtmlStrip
         }
         static void Main(string[] args)
         {
+            
+            Console.WriteLine("HtmlStrip");
+            if (args.Length == 0)
+            {
+                Console.WriteLine("Usage: htmlstrip filename");
+                return;
+            }
 
+
+
+            if (!File.Exists(args[0]))
+            {
+                Console.WriteLine($"Error: file {args[0]} does not exist.");
+                return;
+            }
+            string code = System.IO.File.ReadAllText(args[0]);
+
+            /*
             WebClient client = new WebClient();
             string teste1 = "https://pt.wikipedia.org/wiki/Madeira_(regi%C3%A3o_aut%C3%B3noma)";
             string teste2 = "https://pt.lipsum.com/feed/html";
             string teste3 = "https://pt.wikipedia.org/wiki/Poncha";
             string teste4 = "https://pt.wikipedia.org/wiki/Portugal";
             string downloadString = client.DownloadString(teste4);
+            */
+            //string[] tokens_p=Regex.Split(downloadString, @"<[p]>|<[p][ ][^<>]+>|</[p]>");
 
-            string[] tokens_p=Regex.Split(downloadString, @"<[p]>|<[p][ ][^<>]+>|</[p]>");
-            
+            string[] tokens_p = Regex.Split(code, @"<[p]>|<[p][ ][^<>]+>|</[p]>");
             string concatenar = "";
             for (int i = 1;i< tokens_p.Length;i+=2)
             {
@@ -39,6 +58,7 @@ namespace HtmlStrip
                 concatenar = string.Concat(concatenar,"\n");
             }
 
+            /*
             string[] tokens_ahref = Regex.Split(concatenar, @"<[a][ ][^<>]+>|</[a]>");
             concatenar = "";
             for (int i = 0; i < tokens_ahref.Length; i += 1)
@@ -49,7 +69,7 @@ namespace HtmlStrip
             concatenar=split_string(new string[] { "<b>", "</b>" },concatenar);
             concatenar = split_string(new string[] { "<i>", "</i>" },concatenar);
 
-           
+           */
             
             string[] tokens_apagar = Regex.Split(concatenar, @"<[^<>]+>");
             concatenar = "";
@@ -57,7 +77,7 @@ namespace HtmlStrip
             {
                 concatenar = string.Concat(concatenar, tokens_apagar[i]);
             }
-
+            
             Console.WriteLine(concatenar);
         }
 
