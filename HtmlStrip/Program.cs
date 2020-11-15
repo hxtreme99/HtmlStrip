@@ -1,7 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
-using System.IO;
 
 namespace HtmlStrip
 {
@@ -67,7 +67,6 @@ namespace HtmlStrip
 
         static void Main(string[] args)
         {
-            
             if (args.Length == 0)
             {
                 Console.WriteLine("Usage: htmlstrip filename");
@@ -87,8 +86,8 @@ namespace HtmlStrip
                     Console.WriteLine($"Error: file {args[0]} does not exist.");
                     return;
                 }
-                code = System.IO.File.ReadAllText(args[0]);
 
+                code = File.ReadAllText(args[0]);
             }
             else
             {
